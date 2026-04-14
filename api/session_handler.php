@@ -53,6 +53,16 @@ class DbSessionHandler implements SessionHandlerInterface {
 }
 
 function initDbSessions($conn) {
+    // Automatically create the sessions table if it doesn't exist to prevent deployment errors
+    $conn->query("
+        CREATE TABLE IF NOT EXISTS `sessions` (
+            `id` VARCHAR(128) NOT NULL PRIMARY KEY,
+            `data` TEXT NOT NULL,
+            `timestamp` INT UNSIGNED NOT NULL,
+            INDEX `idx_timestamp` (`timestamp`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ");
+
     $handler = new DbSessionHandler($conn);
     session_set_save_handler($handler, true);
 }
