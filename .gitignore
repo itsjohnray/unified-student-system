@@ -1,0 +1,25 @@
+# Old root-level PHP files (kept for local XAMPP dev only)
+/index.php
+/register.php
+/dashboard.php
+/admin_dashboard.php
+/admin_requests.php
+/admin_certificate.php
+/announcement.php
+/announcements.php
+/certificate.php
+/grades_1st.php
+/grades_2nd.php
+/manage_grades.php
+/manage_subjects.php
+/manage_users.php
+/messages.php
+/view_grades.php
+/view_subjects.php
+/view_grades.php
+/view_subjects.php
+/logout.php
+/config.php
+
+# Vercel
+.vercel
