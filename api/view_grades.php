@@ -193,7 +193,7 @@ $class = ($status == "Pass") ? "pass" : "fail";
 
 </div>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 document.getElementById("search").addEventListener("keyup", function(){
 let value = this.value.toLowerCase();
 let rows = document.querySelectorAll("#table tr");

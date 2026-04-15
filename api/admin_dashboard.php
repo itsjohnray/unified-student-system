@@ -234,7 +234,7 @@ Requests <?php if($req>0){ ?><span class="badge"><?php echo $req; ?></span><?php
 
 </div>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 function selectUser(name){
 document.getElementById("to").value=name;
 }

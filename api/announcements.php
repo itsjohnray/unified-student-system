@@ -251,7 +251,7 @@ echo "<div class='empty'>No announcements yet.</div>";
 
 <button class="back" onclick="window.location='dashboard.php'">⬅</button>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 document.getElementById("search").addEventListener("keyup", function(){
 let value = this.value.toLowerCase();
 let items = document.querySelectorAll(".announcement");

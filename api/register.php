@@ -341,7 +341,7 @@ echo "<option value='".$c['id']."'>".$c['course_name']."</option>";
 
 </div>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 function strength(){
 let p=document.getElementById("pass").value;
 let bar=document.getElementById("bar");

@@ -292,7 +292,7 @@ while($n=$notif->fetch_assoc()){ ?>
 
 </div>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 function toggleDropdown(){
 let menu = document.getElementById("gradeMenu");
 menu.style.display = (menu.style.display === "block") ? "none" : "block";

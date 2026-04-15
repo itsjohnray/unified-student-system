@@ -12,14 +12,14 @@ if(isset($_POST['add'])){
     $semester = $_POST['semester'];
 
     if(empty($username) || empty($subject) || empty($grade) || empty($semester)){
-        echo "<script>alert('All fields required!')</script>";
+        echo "<script nonce=\"$csp_nonce\">alert('All fields required!')</script>";
     }else{
 
         $sql = "INSERT INTO grades(username,subject,grade,semester)
                 VALUES('$username','$subject','$grade','$semester')";
 
         if($conn->query($sql)){
-            echo "<script>alert('✅ Grade Added Successfully')</script>";
+            echo "<script nonce=\"$csp_nonce\">alert('✅ Grade Added Successfully')</script>";
         }else{
             echo "Error: " . $conn->error;
         }

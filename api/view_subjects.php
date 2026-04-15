@@ -265,7 +265,7 @@ echo "<tr><td colspan='2' class='empty'>No subjects assigned yet.</td></tr>";
 
 <button class="back" onclick="window.location='dashboard.php'">⬅</button>
 
-<script>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
 document.getElementById("search").addEventListener("keyup", function(){
 let value = this.value.toLowerCase();
 let rows = document.querySelectorAll("#table tr");
