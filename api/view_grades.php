@@ -137,7 +137,7 @@ color:#555;
 <a href="dashboard.php">Dashboard</a>
 <a href="view_subjects.php">Subjects</a>
 <div>
-<a href="javascript:void(0)" onclick="toggleDropdown()" style="display:block;padding:15px;color:white;text-decoration:none;">Grades ▼</a>
+<a href="#" id="gradeDropdown" style="display:block;padding:15px;color:white;text-decoration:none;">Grades ▼</a>
 <div id="gradeMenu" style="display:none;background:rgba(255,255,255,0.1);margin-left:10px;border-radius:6px;">
 <a href="view_grades.php" style="padding:10px 15px;font-size:14px;">View All</a>
 <a href="grades_1st.php" style="padding:10px 15px;font-size:14px;">1st Semester</a>
@@ -156,7 +156,7 @@ color:#555;
 
 <div>
 <input type="text" id="search" class="search" placeholder="Search subject...">
-<button class="btn" onclick="window.print()">Print</button>
+<button class="btn" id="printBtn">Print</button>
 </div>
 </div>
 
@@ -202,6 +202,15 @@ $class = ($status == "Pass") ? "pass" : "fail";
 </div>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.getElementById("gradeDropdown").addEventListener("click", function(e){
+    e.preventDefault();
+    toggleDropdown();
+});
+
+document.getElementById("printBtn").addEventListener("click", function(){
+    window.print();
+});
+
 function toggleDropdown(){
 let menu = document.getElementById("gradeMenu");
 menu.style.display = (menu.style.display === "block") ? "none" : "block";

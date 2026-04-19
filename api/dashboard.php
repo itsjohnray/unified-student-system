@@ -207,7 +207,7 @@ cursor:pointer;
 <a href="view_subjects.php">Subjects</a>
 
 <div>
-<a href="javascript:void(0)" onclick="toggleDropdown()">Grades ▼</a>
+<a href="#" id="gradeDropdown">Grades ▼</a>
 <div class="dropdown-content" id="gradeMenu">
 <a href="view_grades.php">View All Grades</a>
 <a href="grades_1st.php">1st Semester</a>
@@ -237,7 +237,7 @@ Messages
 <span class="clock" id="clock"></span>
 
 <div class="notif">
-<div class="bell" onclick="openNotif()">🔔</div>
+<div class="bell" id="bellBtn">🔔</div>
 
 <div class="notif-box" id="notifBox">
 <h4>Notifications</h4>
@@ -298,6 +298,15 @@ while($n=$notif->fetch_assoc()){ ?>
 </div>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.getElementById("gradeDropdown").addEventListener("click", function(e){
+    e.preventDefault();
+    toggleDropdown();
+});
+
+document.getElementById("bellBtn").addEventListener("click", function(){
+    openNotif();
+});
+
 function toggleDropdown(){
 let menu = document.getElementById("gradeMenu");
 menu.style.display = (menu.style.display === "block") ? "none" : "block";
