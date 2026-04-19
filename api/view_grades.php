@@ -136,9 +136,17 @@ color:#555;
 <h2>🎓 Student</h2>
 <a href="dashboard.php">Dashboard</a>
 <a href="view_subjects.php">Subjects</a>
-<a href="view_grades.php">Grades</a>
+<div>
+<a href="javascript:void(0)" onclick="toggleDropdown()" style="display:block;padding:15px;color:white;text-decoration:none;">Grades ▼</a>
+<div id="gradeMenu" style="display:none;background:rgba(255,255,255,0.1);margin-left:10px;border-radius:6px;">
+<a href="view_grades.php" style="padding:10px 15px;font-size:14px;">View All</a>
+<a href="grades_1st.php" style="padding:10px 15px;font-size:14px;">1st Semester</a>
+<a href="grades_2nd.php" style="padding:10px 15px;font-size:14px;">2nd Semester</a>
+</div>
+</div>
 <a href="announcements.php">Announcements</a>
 <a href="certificate.php">Certificate</a>
+<a href="logout.php">Logout</a>
 </div>
 
 <div class="content">
@@ -194,14 +202,17 @@ $class = ($status == "Pass") ? "pass" : "fail";
 </div>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
+function toggleDropdown(){
+let menu = document.getElementById("gradeMenu");
+menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
 document.getElementById("search").addEventListener("keyup", function(){
 let value = this.value.toLowerCase();
 let rows = document.querySelectorAll("#table tr");
 
-
 rows.forEach((row, index)=>{
 if(index===0) return;
-
 row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
 });
 });

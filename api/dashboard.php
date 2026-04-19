@@ -31,9 +31,13 @@ $announcements_count = $conn->query("SELECT COUNT(*) as total FROM announcements
 $avg = $conn->query("SELECT AVG(grade) as avg_grade FROM grades WHERE username='$username'")->fetch_assoc();
 $average = $avg['avg_grade'] ? round($avg['avg_grade'],2) : 0;
 
-if($average >= 90){ $status="Excellent"; }
-elseif($average >= 75){ $status="Good"; }
-else{ $status="Needs Improvement"; }
+if($average > 0){
+    if($average <= 1.50){ $status="Excellent"; }
+    elseif($average <= 3.00){ $status="Good"; }
+    else{ $status="Needs Improvement"; }
+}else{
+    $status = "No Grades Yet";
+}
 
 $hour = date("H");
 if($hour >= 5 && $hour < 12){
@@ -205,6 +209,7 @@ cursor:pointer;
 <div>
 <a href="javascript:void(0)" onclick="toggleDropdown()">Grades ▼</a>
 <div class="dropdown-content" id="gradeMenu">
+<a href="view_grades.php">View All Grades</a>
 <a href="grades_1st.php">1st Semester</a>
 <a href="grades_2nd.php">2nd Semester</a>
 </div>
@@ -262,7 +267,7 @@ while($n=$notif->fetch_assoc()){ ?>
 
 <div class="user-box">
 <h2>Academic Overview</h2>
-<p><?php echo $status; ?> (<?php echo $average; ?>%)</p>
+<p><?php echo $status; ?> <?php if($average > 0) echo "(" . $average . ")"; ?></p>
 </div>
 
 <div class="grid">

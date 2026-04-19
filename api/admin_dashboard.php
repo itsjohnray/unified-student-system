@@ -19,9 +19,9 @@ $online=$conn->query("SELECT username FROM users WHERE last_active > NOW() - INT
 $preview=$conn->query("SELECT * FROM grades ORDER BY id DESC LIMIT 5");
 $recent_req=$conn->query("SELECT * FROM requests ORDER BY id DESC LIMIT 5");
 
-$high=$conn->query("SELECT * FROM grades WHERE grade>=90")->num_rows;
-$mid=$conn->query("SELECT * FROM grades WHERE grade>=75 AND grade<90")->num_rows;
-$low=$conn->query("SELECT * FROM grades WHERE grade<75")->num_rows;
+$high=$conn->query("SELECT * FROM grades WHERE grade<=1.50")->num_rows;
+$mid=$conn->query("SELECT * FROM grades WHERE grade>1.50 AND grade<=3.00")->num_rows;
+$low=$conn->query("SELECT * FROM grades WHERE grade>3.00")->num_rows;
 
 if(isset($_POST['send'])){
     $to=$_POST['to'];
