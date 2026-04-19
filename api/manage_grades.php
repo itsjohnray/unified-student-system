@@ -142,7 +142,7 @@ text-decoration:none;
 <td><?php echo $row['grade']; ?></td>
 <td><?php echo $row['semester']; ?></td>
 <td>
-<a href="?delete=<?php echo $row['id']; ?>" onclick="return confirm('Delete this grade?')">Delete</a>
+<a href="#" class="del-btn" data-id="<?php echo $row['id']; ?>">Delete</a>
 </td>
 </tr>
 <?php } ?>
@@ -151,6 +151,17 @@ text-decoration:none;
 
 <br>
 <a href="admin_dashboard.php">⬅ Back</a>
+
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.addEventListener("click", function(e){
+    if(e.target && e.target.classList.contains("del-btn")){
+        e.preventDefault();
+        if(confirm("Delete this grade?")){
+            window.location.href = "?delete=" + e.target.getAttribute("data-id");
+        }
+    }
+});
+</script>
 
 </body>
 </html>

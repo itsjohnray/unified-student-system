@@ -217,12 +217,18 @@ echo "</table>";
 </div>
 
 <div class="actions">
-<button onclick="window.print()">Print</button>
+<button id="printBtn">Print</button>
 
 <a href="dashboard.php">
 <button class="back-btn">⬅ Back to Dashboard</button>
 </a>
 </div>
+
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.getElementById("printBtn").addEventListener("click", function(){
+    window.print();
+});
+</script>
 
 </body>
 </html>

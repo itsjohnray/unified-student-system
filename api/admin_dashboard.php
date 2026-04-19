@@ -214,7 +214,7 @@ Requests <?php if($req>0){ ?><span class="badge"><?php echo $req; ?></span><?php
 <h3>🟢 Online Users</h3>
 
 <?php while($u=$online->fetch_assoc()){ ?>
-<div class="user" onclick="selectUser('<?php echo $u['username']; ?>')">
+<div class="user" data-username="<?php echo $u['username']; ?>">
 <span><?php echo $u['username']; ?></span>
 <div class="dot"></div>
 </div>
@@ -235,6 +235,12 @@ Requests <?php if($req>0){ ?><span class="badge"><?php echo $req; ?></span><?php
 </div>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.querySelectorAll(".user").forEach(el => {
+    el.addEventListener("click", function(){
+        selectUser(this.getAttribute("data-username"));
+    });
+});
+
 function selectUser(name){
 document.getElementById("to").value=name;
 }

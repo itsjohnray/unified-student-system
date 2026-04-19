@@ -208,9 +208,10 @@ to{opacity:1;transform:translateY(0);}
 <a href="view_subjects.php">Subjects</a>
 
 <div class="dropdown">
-<a onclick="toggleMenu()">Grades ▼</a>
+<a href="#" id="gradeDropdown">Grades ▼</a>
 
 <div class="submenu" id="gradesMenu">
+<a href="view_grades.php">View All Grades</a>
 <a href="grades_1st.php">1st Semester</a>
 <a href="grades_2nd.php">2nd Semester</a>
 </div>
@@ -230,7 +231,7 @@ to{opacity:1;transform:translateY(0);}
 
 <div>
 <input type="text" id="search" class="search" placeholder="Search subject...">
-<button class="btn" onclick="printTable()">Print</button>
+<button class="btn" id="printBtn">Print</button>
 </div>
 </div>
 
@@ -259,11 +260,23 @@ echo "<tr><td colspan='2' class='empty'>No subjects assigned yet.</td></tr>";
 
 </table>
 
-</div>
+<script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.querySelectorAll("#deleteLink").forEach(el => {
+    el.addEventListener("click", function(e){
+        if(!confirm('Delete this grade?')){
+            e.preventDefault();
+        }else{
+            window.location.href = "?delete=" + this.getAttribute("data-id");
+        }
+    });
+});
+</script>
 
 </div>
 
-<button class="back" onclick="window.location='dashboard.php'">⬅</button>
+</div>
+
+<button class="back" id="backBtn">⬅</button>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
 document.getElementById("search").addEventListener("keyup", function(){
@@ -274,6 +287,19 @@ rows.forEach((row,i)=>{
 if(i===0) return;
 row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
 });
+});
+
+document.getElementById("gradeDropdown").addEventListener("click", function(e){
+    e.preventDefault();
+    toggleMenu();
+});
+
+document.getElementById("printBtn").addEventListener("click", function(){
+    printTable();
+});
+
+document.getElementById("backBtn").addEventListener("click", function(){
+    window.location='dashboard.php';
 });
 
 function printTable(){

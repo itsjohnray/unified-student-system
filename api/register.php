@@ -289,14 +289,14 @@ width:95%;
 
 <div class="input-box">
 <i>🔒</i>
-<input type="password" id="pass" name="password" placeholder="Password" required onkeyup="strength()">
+<input type="password" id="pass" name="password" placeholder="Password" required>
 </div>
 
 <div class="bar"><span id="bar"></span></div>
 
 <div class="input-box">
 <i>🔐</i>
-<input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required onkeyup="match()">
+<input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required>
 </div>
 
 <div class="input-box">
@@ -342,6 +342,9 @@ echo "<option value='".$c['id']."'>".$c['course_name']."</option>";
 </div>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
+document.getElementById("pass").addEventListener("keyup", strength);
+document.getElementById("confirm").addEventListener("keyup", match);
+
 function strength(){
 let p=document.getElementById("pass").value;
 let bar=document.getElementById("bar");

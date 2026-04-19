@@ -195,9 +195,10 @@ to{opacity:1;transform:translateY(0);}
 <a href="view_subjects.php">Subjects</a>
 
 <div class="dropdown">
-<a onclick="toggleMenu()">Grades ▼</a>
+<a href="#" id="gradeDropdown">Grades ▼</a>
 
 <div class="submenu" id="gradesMenu">
+<a href="view_grades.php">View All Grades</a>
 <a href="grades_1st.php">1st Semester</a>
 <a href="grades_2nd.php">2nd Semester</a>
 </div>
@@ -249,7 +250,7 @@ echo "<div class='empty'>No announcements yet.</div>";
 
 </div>
 
-<button class="back" onclick="window.location='dashboard.php'">⬅</button>
+<button class="back" id="backBtn">⬅</button>
 
 <script nonce="<?php echo $csp_nonce ?? ''; ?>">
 document.getElementById("search").addEventListener("keyup", function(){
@@ -259,6 +260,15 @@ let items = document.querySelectorAll(".announcement");
 items.forEach(item=>{
 item.style.display = item.innerText.toLowerCase().includes(value) ? "" : "none";
 });
+});
+
+document.getElementById("gradeDropdown").addEventListener("click", function(e){
+    e.preventDefault();
+    toggleMenu();
+});
+
+document.getElementById("backBtn").addEventListener("click", function(){
+    window.location='dashboard.php';
 });
 
 setInterval(()=>{
